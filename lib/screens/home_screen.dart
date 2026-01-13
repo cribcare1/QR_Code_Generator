@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _textEditingController = TextEditingController();
   final _key = GlobalKey<FormState>();
   String? selectedValue;
-  List<String> valueList = ["Dot", "Plain"];
+  List<String> valueList = ["Dot", "Line"];
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               TextFormField(
                 controller: _textEditingController,
+                textCapitalization: TextCapitalization.characters,
                 decoration: InputDecoration(
                   hintText: "Enter Text",
                   hintStyle: Theme.of(
