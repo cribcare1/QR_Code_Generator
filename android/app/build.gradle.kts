@@ -6,11 +6,8 @@ plugins {
 }
 
 android {
-<<<<<<< HEAD
-    namespace = "com.example.qr_code"
-=======
+
     namespace = "com.dl.qrcode.qrcodegenerator"
->>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -25,11 +22,8 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-<<<<<<< HEAD
-        applicationId = "com.example.qr_code"
-=======
+
         applicationId = "com.dl.qrcode.qrcodegenerator"
->>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
