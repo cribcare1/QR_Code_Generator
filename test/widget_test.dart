@@ -8,7 +8,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+<<<<<<< HEAD
+import 'package:qr_code/main.dart';
+=======
 import 'package:qrcodegenerator/main.dart';
+>>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

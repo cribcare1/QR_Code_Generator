@@ -5,6 +5,15 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
+<<<<<<< HEAD
+PRODUCT_NAME = qr_code
+
+// The application's bundle identifier
+PRODUCT_BUNDLE_IDENTIFIER = com.example.qrCode
+
+// The copyright displayed in application information
+PRODUCT_COPYRIGHT = Copyright © 2026 com.example. All rights reserved.
+=======
 PRODUCT_NAME = qrcodegenerator
 
 // The application's bundle identifier
@@ -12,3 +21,4 @@ PRODUCT_BUNDLE_IDENTIFIER = com.dl.qrcode.qrcodegenerator
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 com.dl.qrcode. All rights reserved.
+>>>>>>> 91bb29d52df163477bcad2612346251bb19285bf

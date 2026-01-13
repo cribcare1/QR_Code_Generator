@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
+    "name": "qr_code",
+    "short_name": "qr_code",
+=======
     "name": "qrcodegenerator",
     "short_name": "qrcodegenerator",
+>>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
