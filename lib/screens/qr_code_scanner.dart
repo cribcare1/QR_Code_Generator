@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+
+import '../utils/qr_crypto_helper.dart';
 
 class QrCodeScanner extends StatefulWidget {
   const QrCodeScanner({super.key});
@@ -30,26 +34,55 @@ class _QrCodeScannerState extends State<QrCodeScanner> {
 
     final Barcode? barcode = capture.barcodes.firstWhere(
           (b) => b.rawValue != null && b.rawValue!.isNotEmpty,
-      orElse: () => Barcode(rawValue: null, displayValue: null, format: BarcodeFormat.unknown),
+      orElse: () => Barcode(
+        rawValue: null,
+        displayValue: null,
+        format: BarcodeFormat.unknown,
+      ),
     );
 
-    if (barcode!.rawValue != null && barcode.rawValue!.isNotEmpty) {
-      final value = barcode.rawValue!;
-      print("✅ QR Code Detected: $value");
+    if (barcode?.rawValue == null || barcode!.rawValue!.isEmpty) return;
 
-      // update UI first before stopping camera
+    final encryptedValue = barcode.rawValue!;
+    print("🔐 Encrypted QR: $encryptedValue");
+
+    // Check if the scanned value is actually Base64
+    if (!QrCryptoHelper.isBase64(encryptedValue)) {
+      debugPrint("❌ Invalid QR: Not a valid encrypted value");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Invalid or unsupported QR code"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    try {
+      // 🔓 DECRYPT QR
+      final decrypted = QrCryptoHelper.decrypt(encryptedValue);
+      print("decrypted value==="+decrypted);
+      // // ✅ VALID QR
       if (mounted) {
         setState(() {
           _isScanned = true;
-          scannedValue = value;
+          scannedValue = decrypted;
         });
       }
 
-      // Give UI a chance to rebuild before stopping
       await Future.delayed(const Duration(milliseconds: 300));
       await controller.stop();
+    } catch (e) {
+      debugPrint("❌ Invalid QR: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Invalid or unsupported QR code"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
+
 
   Future<void> _toggleFlash() async {
     await controller.toggleTorch();

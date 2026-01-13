@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -11,6 +12,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../utils/qr_crypto_helper.dart';
+
 class QrCodeScreen extends StatefulWidget {
   final String data;
   final String selectedData;
@@ -23,15 +26,24 @@ class QrCodeScreen extends StatefulWidget {
 }
 
 class _QrCodeScreenState extends State<QrCodeScreen> {
-  String encryptQR(String plainText) {
-    final key = enc.Key.fromUtf8('xxxxxxxxxxxxxxxx'); // 16 chars
-    final iv = enc.IV.fromUtf8('****************'); // 16 chars
+  // static const String _secretKey = 'SUTJAN_CONTAINER';
+  //
+  //
+  // static String encryptQR(String plainText) {
+  //   final key = enc.Key.fromUtf8(_secretKey);
+  //
+  //   // IV must be 16 chars = 128-bit
+  //   final iv = enc.IV.fromUtf8('1234567890123456');
+  //
+  //   final encrypter = enc.Encrypter(enc.AES(key));
+  //
+  //   final encrypted = encrypter.encrypt(plainText, iv: iv);
+  //   print('Encrypted: ${encrypted.base64}');
+  //
+  //   // Combine IV + cipher text
+  //   return encrypted.base64;
+  // }
 
-    final encrypter = enc.Encrypter(enc.AES(key));
-    final encrypted = encrypter.encrypt(plainText, iv: iv);
-
-    return encrypted.base64;
-  }
 
   final ScreenshotController screenshotController = ScreenshotController();
 
@@ -59,7 +71,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
       final tempDir = await getTemporaryDirectory();
       final file = File(
-        '${tempDir.path}/qr_${widget.data}.pdf',
+        '${tempDir.path}/qr_${widget.selectedData}_${widget.data}.pdf',
       );
 
       await file.writeAsBytes(await pdf.save());
@@ -112,7 +124,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
         child: AspectRatio(
           aspectRatio: 1, // 👈 removes extra space
           child: PrettyQrView.data(
-            data: encryptQR(widget.data),
+            data: QrCryptoHelper.encryptQR(widget.data),
             errorCorrectLevel: QrErrorCorrectLevel.H,
             decoration: const PrettyQrDecoration(
               background: Colors.white,
@@ -127,13 +139,10 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                   color: Colors.black,
                   roundFactor: 0.1,
                 ),
-                // alignmentPatterns: PrettyQrDotsSymbol(
-                //   // color: Colors.black,
-                //   // density: 0.3
-                // ),
+
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/logo.png'),
+                image: AssetImage('assets/images/logo_black.png'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
@@ -158,7 +167,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
         child: AspectRatio(
           aspectRatio: 1,
           child: QrImageView(
-            data: encryptQR(widget.data),
+            data: QrCryptoHelper.encryptQR(widget.data),
             version: QrVersions.auto,
             errorCorrectionLevel: QrErrorCorrectLevel.H,
             backgroundColor: Colors.white,
@@ -189,7 +198,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
         child: AspectRatio(
           aspectRatio: 1,
           child: QrImageView(
-            data: encryptQR(widget.data),
+            data: QrCryptoHelper.encryptQR(widget.data),
             version: QrVersions.auto,
             errorCorrectionLevel: QrErrorCorrectLevel.H,
             backgroundColor: Colors.white,
@@ -207,7 +216,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
             ),
 
             // 🖼️ CENTER IMAGE
-            embeddedImage: const AssetImage('assets/images/logo2.jpeg'),
+            embeddedImage: const AssetImage('assets/images/logo_black.png'),
             embeddedImageStyle: const QrEmbeddedImageStyle(
               size: Size(60, 60), // 👈 controls image size
             ),
@@ -230,7 +239,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
         child: AspectRatio(
           aspectRatio: 1, // 👈 removes extra space
           child: PrettyQrView.data(
-            data: encryptQR(widget.data),
+            data: QrCryptoHelper.encryptQR(widget.data),
             errorCorrectLevel: QrErrorCorrectLevel.H,
             decoration: const PrettyQrDecoration(
               background: Colors.white,
@@ -247,7 +256,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                 ),
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/logo2.jpeg'),
+                image: AssetImage('assets/images/logo_black.png'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
