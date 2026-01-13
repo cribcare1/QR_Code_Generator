@@ -4,10 +4,17 @@ project(runner LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
+<<<<<<< HEAD
 set(BINARY_NAME "qr_code")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
 set(APPLICATION_ID "com.example.qr_code")
+=======
+set(BINARY_NAME "qrcodegenerator")
+# The unique GTK application identifier for this application. See:
+# https://wiki.gnome.org/HowDoI/ChooseApplicationID
+set(APPLICATION_ID "com.dl.qrcode.qrcodegenerator")
+>>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

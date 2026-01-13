@@ -89,6 +89,7 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
+<<<<<<< HEAD
             VALUE "CompanyName", "com.example" "\0"
             VALUE "FileDescription", "qr_code" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
@@ -96,6 +97,15 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "qr_code.exe" "\0"
             VALUE "ProductName", "qr_code" "\0"
+=======
+            VALUE "CompanyName", "com.dl.qrcode" "\0"
+            VALUE "FileDescription", "qrcodegenerator" "\0"
+            VALUE "FileVersion", VERSION_AS_STRING "\0"
+            VALUE "InternalName", "qrcodegenerator" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.dl.qrcode. All rights reserved." "\0"
+            VALUE "OriginalFilename", "qrcodegenerator.exe" "\0"
+            VALUE "ProductName", "qrcodegenerator" "\0"
+>>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

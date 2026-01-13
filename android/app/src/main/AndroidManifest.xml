@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -6,6 +7,10 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:label="Qr Code"
+=======
+    <application
+        android:label="qrcodegenerator"
+>>>>>>> 91bb29d52df163477bcad2612346251bb19285bf
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
