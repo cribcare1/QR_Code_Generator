@@ -199,11 +199,11 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
               // 🔹 Clean white cut-out (removes QR noise)
               Container(
-                width: 57,
-                height: 57,
+                width: 55,
+                height: 55,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
 
