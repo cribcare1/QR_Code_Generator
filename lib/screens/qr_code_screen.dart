@@ -26,24 +26,6 @@ class QrCodeScreen extends StatefulWidget {
 }
 
 class _QrCodeScreenState extends State<QrCodeScreen> {
-  // static const String _secretKey = 'SUTJAN_CONTAINER';
-  //
-  //
-  // static String encryptQR(String plainText) {
-  //   final key = enc.Key.fromUtf8(_secretKey);
-  //
-  //   // IV must be 16 chars = 128-bit
-  //   final iv = enc.IV.fromUtf8('1234567890123456');
-  //
-  //   final encrypter = enc.Encrypter(enc.AES(key));
-  //
-  //   final encrypted = encrypter.encrypt(plainText, iv: iv);
-  //   print('Encrypted: ${encrypted.base64}');
-  //
-  //   // Combine IV + cipher text
-  //   return encrypted.base64;
-  // }
-
 
   final ScreenshotController screenshotController = ScreenshotController();
 
@@ -71,7 +53,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
       final tempDir = await getTemporaryDirectory();
       final file = File(
-        '${tempDir.path}/qr_${widget.selectedData}_${widget.data}.pdf',
+        '${tempDir.path}/Qr_${widget.selectedData}_${widget.data}.pdf',
       );
 
       await file.writeAsBytes(await pdf.save());
@@ -142,7 +124,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/sustajn_logo.jpeg'),
+                image: AssetImage('assets/images/qr_logo_without_bg.png'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
@@ -189,41 +171,56 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
     return Center(
       child: Container(
         width: 280,
-        padding: const EdgeInsets.all(4),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white,
-          // borderRadius: BorderRadius.circular(12),
-          // border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: AspectRatio(
           aspectRatio: 1,
-          child: QrImageView(
-            data: QrCryptoHelper.encryptQR(widget.data),
-            version: QrVersions.auto,
-            errorCorrectionLevel: QrErrorCorrectLevel.H,
-            backgroundColor: Colors.white,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // 🔹 QR Code
+              QrImageView(
+                data: QrCryptoHelper.encryptQR(widget.data),
+                version: QrVersions.auto,
+                errorCorrectionLevel: QrErrorCorrectLevel.H,
+                backgroundColor: Colors.white,
+                eyeStyle: const QrEyeStyle(
+                  eyeShape: QrEyeShape.square,
+                  color: Colors.black,
+                ),
+                dataModuleStyle: const QrDataModuleStyle(
+                  dataModuleShape: QrDataModuleShape.square,
+                  color: Colors.black,
+                ),
+              ),
 
-            // 👁 Eye styling
-            eyeStyle: const QrEyeStyle(
-              eyeShape: QrEyeShape.square,
-              color: Colors.black,
-            ),
+              // 🔹 Clean white cut-out (removes QR noise)
+              Container(
+                width: 55,
+                height: 55,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
 
-            // ▢ Data dots styling
-            dataModuleStyle: const QrDataModuleStyle(
-              dataModuleShape: QrDataModuleShape.square,
-              color: Colors.black,
-            ),
-
-            // 🖼️ CENTER IMAGE
-            embeddedImage: const AssetImage('assets/images/sustajn_logo.jpeg'),
-            embeddedImageStyle: const QrEmbeddedImageStyle(
-              size: Size(60, 60), // 👈 controls image size
-            ),
+              // 🔹 Center Logo
+              Image.asset(
+                'assets/images/qr_logo_without_bg.png',
+                width: 55,
+                height: 55,
+                fit: BoxFit.contain,
+              ),
+            ],
           ),
         ),
       ),
     );
+
+
   }
 
   Widget _qrWithBlackImage() {
@@ -256,7 +253,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                 ),
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/sustajn_logo.jpeg'),
+                image: AssetImage('assets/images/qr_logo_without_bg.png'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
