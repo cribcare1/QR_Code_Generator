@@ -142,7 +142,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/logo_black.png'),
+                image: AssetImage('assets/images/sustajn_logo.jpeg'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
@@ -216,7 +216,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
             ),
 
             // 🖼️ CENTER IMAGE
-            embeddedImage: const AssetImage('assets/images/logo_black.png'),
+            embeddedImage: const AssetImage('assets/images/sustajn_logo.jpeg'),
             embeddedImageStyle: const QrEmbeddedImageStyle(
               size: Size(60, 60), // 👈 controls image size
             ),
@@ -256,7 +256,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                 ),
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/logo_black.png'),
+                image: AssetImage('assets/images/sustajn_logo.jpeg'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
