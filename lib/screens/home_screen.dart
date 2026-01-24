@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _textEditingController = TextEditingController();
   final _key = GlobalKey<FormState>();
   String? selectedValue;
-  List<String> valueList = ["Dot", "Line"];
+  List<String> valueList = ["Dot", "Box"];
 
   @override
   Widget build(BuildContext context) {
