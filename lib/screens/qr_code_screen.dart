@@ -71,7 +71,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
       final tempDir = await getTemporaryDirectory();
       final file = File(
-        '${tempDir.path}/qr_${widget.selectedData}_${widget.data}.pdf',
+        '${tempDir.path}/Qr_${widget.selectedData}_${widget.data}.pdf',
       );
 
       await file.writeAsBytes(await pdf.save());
@@ -142,7 +142,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/sustajn_logo.jpeg'),
+                image: AssetImage('assets/images/sustajn_logo_1.png'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
@@ -256,7 +256,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
                 ),
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/sustajn_logo.jpeg'),
+                image: AssetImage('assets/images/sustajn_logo_1.png'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
