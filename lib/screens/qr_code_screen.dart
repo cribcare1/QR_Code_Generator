@@ -124,7 +124,7 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
               ),
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/qr_logo_without_bg.png'),
+                image: AssetImage('assets/images/sustajn_logo.jpeg'),
                 position: PrettyQrDecorationImagePosition.embedded,
                 scale: 0.30,
                 fit: BoxFit.fill,
@@ -171,56 +171,41 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
     return Center(
       child: Container(
         width: 280,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          // borderRadius: BorderRadius.circular(12),
+          // border: Border.all(color: Colors.black),
         ),
         child: AspectRatio(
           aspectRatio: 1,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // 🔹 QR Code
-              QrImageView(
-                data: QrCryptoHelper.encryptQR(widget.data),
-                version: QrVersions.auto,
-                errorCorrectionLevel: QrErrorCorrectLevel.H,
-                backgroundColor: Colors.white,
-                eyeStyle: const QrEyeStyle(
-                  eyeShape: QrEyeShape.square,
-                  color: Colors.black,
-                ),
-                dataModuleStyle: const QrDataModuleStyle(
-                  dataModuleShape: QrDataModuleShape.square,
-                  color: Colors.black,
-                ),
-              ),
+          child: QrImageView(
+            data: QrCryptoHelper.encryptQR(widget.data),
+            version: QrVersions.auto,
+            errorCorrectionLevel: QrErrorCorrectLevel.H,
+            backgroundColor: Colors.white,
 
-              // 🔹 Clean white cut-out (removes QR noise)
-              Container(
-                width: 55,
-                height: 55,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+            // 👁 Eye styling
+            eyeStyle: const QrEyeStyle(
+              eyeShape: QrEyeShape.square,
+              color: Colors.black,
+            ),
 
-              // 🔹 Center Logo
-              Image.asset(
-                'assets/images/qr_logo_without_bg.png',
-                width: 55,
-                height: 55,
-                fit: BoxFit.contain,
-              ),
-            ],
+            // ▢ Data dots styling
+            dataModuleStyle: const QrDataModuleStyle(
+              dataModuleShape: QrDataModuleShape.square,
+              color: Colors.black,
+            ),
+
+            // 🖼️ CENTER IMAGE
+            embeddedImage: const AssetImage('assets/images/sustajn_logo.jpeg'),
+            embeddedImageStyle: const QrEmbeddedImageStyle(
+              size: Size(60, 60), // 👈 controls image size
+            ),
           ),
         ),
       ),
     );
-
-
   }
 
   Widget _qrWithBlackImage() {
